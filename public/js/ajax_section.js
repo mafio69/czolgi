@@ -1,7 +1,7 @@
 /**
  * Created by mf196 on 11.03.2017.
  */
-var url ='/dzialy'
+var url ='/admin/dzialy'
 $(document).ready(function () {
     $("#btn-save").click(function (e) {
         $.ajaxSetup({
@@ -37,8 +37,8 @@ $(document).ready(function () {
                 console.log(data);
 
                 var task = '<tr id="row-' + data.id + '"><td>' + data.id + '</td><td>' + data.nazwa + '</td><td>' + data.overrding_nazwa + '</td><td>' + data.nazwa + '</td>';
-                task += '<td><button  href="/dzialy/' + data.id + '/edit" class="btn btn-outline-primary btn-sm" value="' + data.id + '">Edytuj</button>';
-                task += ' <button value="' + data.id + '" href="/dzialy/' + data.id + '" class="btn btn-outline-danger btn-sm delete_dzial">Usuń</button></td></tr>';
+                task += '<td><button  href="/admin/dzialy/' + data.id + '/edit" class="btn btn-outline-primary btn-sm" value="' + data.id + '">Edytuj</button></td>';
+                task += '<td><button value="' + data.id + '" href="/admin/dzialy/' + data.id + '" class="btn btn-outline-danger btn-sm delete_dzial">Usuń</button></td></tr>';
 
                 if (state == "add") { //if user added a new record
                     $('#tableSection').append(task);
@@ -75,27 +75,40 @@ $(document).ready(function () {
         });
     });
 
-    $('.delete_dzial').click(function () {
+   $('.edit-dzial').on('click',function (e) {
+      e.preventDefault();
+       var sec_id = $(this).val();
+       console.log(sec_id);
+       $.get(url + '/' + sec_id, function (data) {
+           //success data
+           console.log(data);
+           $('#frmTasks').attr('action', '/artykuly/' + data.id);
+           $('#task_id').val(data.id);
+           $('#nazwaEdit').val(data.nazwa);
+           $('#opisEdit').val(data.opis);
+           $('#deleteArt').val(sec_id);
+           var opcje = '<select id="overrding_id" class="form-control" name="overrding_id">';
+           var i=0;
+           console.log(data);
+            data.over.forEach(function (element) {
+                console.log(element);
+                opcje += '<option ';
+                 if(element.id == data.overriding_id)
+                 {
+                     opcje += ' selected ';
+                     console.log(element.id + ' = '+data.overriding_id);
+                 }
+                opcje += 'value="'+element.id +'">'+element.nazwa+'</option>';
+                i++;
+            })
+                   opcje += '</select>';
+            $('#opcje').append(opcje);
+           $('#myModalEdit').modal('show');
+       })
+
+   })
 
 
-        var task_id = $(this).val();
 
-        $.ajax({
-            headers: {
 
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-
-            },
-            type: "DELETE",
-            url: url + '/' + task_id,
-            success: function (data) {
-                console.log(data);
-
-                $("#row-" + task_id).remove();
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        });
-    });
 });

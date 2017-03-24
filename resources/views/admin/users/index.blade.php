@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 
 @section('content')
     <h2>Użytkownicy zarejstrowani w systemie <span class="badge">{{$users->count()}}</span></h2>
     <div class="clearfix"><a class="btn btn-default pull-right" href="/users/create"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj uzytkownika</a></div>
-    <div class="table-responsive">
-    <table class="table table-striped">
+    <div class="table-responsive" style="overflow: visible !important;">
+    <table class="table table-striped" >
         <thead>
         <tr>
             <th>Nazwa</th>
@@ -29,14 +29,14 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                        {{--}} <li><a href="{{url('/users/'.$user->id)}}" title="Pokaż"><i class="fa fa-eye" aria-hidden="true"></i> Pokaż</a></li>{{--}}
-                        <li><a class="bg-warning" href="/users/{{$user->id}}/edit"><i class="fa fa-pencil" aria-hidden="true"></i> Edytuj</a></li>
+                        <li><a class="btn btn-link" href="/admin/users/{{$user->id}}/edit"><i class="fa fa-pencil"  aria-hidden="true"></i><b> Edytuj</b></a></li>
                         <li>
 
-                            <form method="POST" action="{{ url('/users/' . $user->id ) }}">
+                            <form method="POST" action="{{ url('/admin/users/' . $user->id ) }}">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 
-                                <button type="submit" onClick="return confirm('Czy na pewno chcesz usunąć?')">
+                                <button class="btn btn-link" type="submit" onClick="return confirm('Czy na pewno chcesz wyłączyć uzytkownika?')">
                                     <i class="fa fa-minus-circle" aria-hidden="true"></i> Deaktywuj
                                 </button>
                             </form>

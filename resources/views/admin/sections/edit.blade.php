@@ -3,7 +3,7 @@
     {{$title}}
 @endsection
 @section('content')
-    <form method="post" action="{{url('dzialy/'.$section->id)}}">
+    <form method="post" action="{{url('/admin/dzialy/'.$section->id)}}">
         {{ csrf_field() }}
         {{method_field('PUT')}}
         <div class="form-group">

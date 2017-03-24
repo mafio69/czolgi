@@ -25,56 +25,89 @@ Route::group([
     'middleware' => 'role',
     'role' => 'admin'
 ], function () {
-    Route::get('dzialy', [
+    Route::get('admin/artykuly', [
+        'uses' => 'ArticlesController@index',
+        'as' => 'articles'
+    ]);
+    Route::get('admin/artykuly/create', [
+        'uses' => 'ArticlesController@create',
+        'as' => 'articles.create'
+    ]);
+    Route::get('admin/artykuly/{id}', [
+        'uses' => 'ArticlesController@dane',
+        'as' => 'articles.dane'
+    ]);
+    Route::post('admin/artykuly', [
+        'uses' => 'ArticlesController@store',
+        'as' => 'articles.store'
+    ]);
+    Route::delete('admin/artykuly/{id}', [
+        'uses' => 'ArticlesController@destroy',
+        'as' => 'articles.delete'
+    ]);
+    Route::get('admin/artykuly/{id}/edit', [
+        'uses' => 'ArticlesController@edit',
+        'as' => 'articles.edit'
+    ]);
+    Route::put('admin/artykuly/{id}', [
+        'uses' => 'ArticlesController@update',
+        'as' => 'articles.update'
+    ]);
+    Route::get('admin/dzialy', [
         'uses' => 'SectionsController@index',
         'as' => 'sections'
     ]);
-    Route::post('dzialy', [
+    Route::get('admin/dzialy/{id}', [
+        'uses' => 'SectionsController@dane',
+        'as' => 'sections.dane'
+    ]);
+    Route::post('admin/dzialy', [
         'uses' => 'SectionsController@store',
         'as' => 'sections.store'
     ]);
 
-    Route::get('dzialy/{id}/edit', [
+    Route::get('admin/dzialy/{id}/edit', [
         'uses' => 'SectionsController@edit',
         'as' => 'sections.edit'
     ]);
-    Route::put('dzialy/{id}', [
+    Route::put('admin/dzialy/{id}', [
         'uses' => 'SectionsController@update',
         'as' => 'sections.update'
     ]);
-    Route::delete('dzialy/{id}', [
+    Route::delete('admin/dzialy/{id}', [
         'uses' => 'SectionsController@destroy',
         'as' => 'sections.delete'
     ]);
-    Route::get('users', [
+    Route::get('/admin/users', [
         'uses' => 'UsersController@index',
-        'as' => 'users'
+        'as' => 'admin.users'
     ]);
 
-    Route::get('users/create', [
+    Route::get('/admin/users/create', [
         'uses' => 'UsersController@create',
-        'as' => 'users.create'
+        'as' => 'admin.users.create'
     ]);
 
-    Route::post('users/store', [
+    Route::post('/admin/users/store', [
         'uses' => 'UsersController@store',
-        'as' => 'users.store'
+        'as' => 'admin.users.store'
     ]);
 
-    Route::get('users/{id}/edit', [
+    Route::get('/admin/users/{id}/edit', [
         'uses' => 'UsersController@edit',
-        'as' => 'users.edit'
+        'as' => 'admin.users.edit'
     ]);
 
-    Route::put('users/{id}', [
+    Route::put('/admin/users/{id}', [
         'uses' => 'UsersController@update',
-        'as' => 'users.update'
+        'as' => 'admin.users.update'
     ]);
 
-    Route::delete('users/{id}', [
+    Route::delete('/admin/users/{id}', [
         'uses' => 'UsersController@destroy',
-        'as' => 'users.delete'
+        'as' => 'admin.users.delete'
     ]);
+    Route::resource('Admin/Nowosci','NewsController');
 });
 
 Auth::routes();
