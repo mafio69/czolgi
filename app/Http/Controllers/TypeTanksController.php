@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\typeTank;
+use Illuminate\Validation\Rule;
 
 class TypeTanksController extends Controller
 {
@@ -13,7 +15,10 @@ class TypeTanksController extends Controller
      */
     public function index()
     {
-        //
+       $typeTanks = typeTank::orderBy('id','desc')->get();
+       $title = " Typy czołgów";
+
+       return view('admin.TypeTanks.index',compact('typeTanks','title'));
     }
 
     /**
@@ -34,7 +39,20 @@ class TypeTanksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $niceNames = [  //nazwy dla pól formularza
+            'name' => 'typ czołgu',
+                    ];
+        $rules = [  //zasady walidacji
+             'name' => 'required|min:3|unique:type_tanks,name',
+        ];
+        $message =[ //wiadomości wyswietlane
+            'required' => 'Pole :attribute jest wymagane.',
+            'min' => 'Pole :attribute  musi mieć minimum :min znaków.',
+        ];
+        $this->validate($request, $rules, $message, $niceNames);
+        $typeTank = typeTank::create($request->all());
+
+        return response()->json($typeTank);
     }
 
     /**
@@ -45,7 +63,9 @@ class TypeTanksController extends Controller
      */
     public function show($id)
     {
-        //
+        $typeTank = typeTank::find($id);
+
+        return response()->json($typeTank);
     }
 
     /**
@@ -68,7 +88,21 @@ class TypeTanksController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $niceNames = [  //nazwy dla pól formularza
+            'name' => 'typ czołgu',
+        ];
+        $rules = [  //zasady walidacji
+            'name' => 'required|min:3|unique:type_tanks,name',
+        ];
+        $message =[ //wiadomości wyswietlane
+            'required' => 'Pole :attribute jest wymagane.',
+            'min' => 'Pole :attribute  musi mieć minimum :min znaków.',
+        ];
+        $this->validate($request, $rules, $message, $niceNames);
+        $typeTank = typeTank::find($id);
+        $typeTank->update($request->all());
+
+        return response()->json($typeTank);
     }
 
     /**
@@ -79,6 +113,9 @@ class TypeTanksController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $typeTank = typeTank::find($id);
+        $typeTank->delete();
+
+        return response()->json($typeTank);
     }
 }

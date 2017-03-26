@@ -38,10 +38,26 @@ Route::group([
         'uses' => 'GalleriesController@edit',
         'as' => 'galleries.edit'
     ]);
+    Route::get('/admin/typyCzolgow',[
+        'uses' => 'TypeTanksController@index',
+        'as' => 'typeTanks'
+    ]);
+    Route::post('/admin/typyCzolgow',[
+        'uses' => 'TypeTanksController@store',
+        'as' => 'typeTanks.store'
+    ]);
+    Route::put('/admin/typyCzolgow/{id}', [
+        'uses' => 'TypeTanksController@update',
+        'as' => 'typeTanks.update'
+    ]);
+    Route::delete('/admin/typyCzolgow/{id}', [
+        'uses' => 'TypeTanksController@destroy',
+        'as' => 'typeTanks.delete'
+    ]);
 
-    Route::get('admin/nowosci', [
-        'uses' => 'NoveltiesController@index',
-        'as' => 'novelties'
+    Route::get('admin/typyCzolgow/{id}', [
+        'uses' => 'TypeTanksController@show',
+        'as' => 'typeTanks.show'
     ]);
 
     Route::get('admin/nowosci/{id}', [

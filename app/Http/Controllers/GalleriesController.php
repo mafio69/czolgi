@@ -63,7 +63,7 @@ class GalleriesController extends Controller
      */
     public function edit($id)
     {
-        $gallery = gallery::find($id);
+        $gallery = gallery::with('typeTank')->find($id);
         $title = 'Edycja '.$gallery->nazwaGaleria ;
 
         return view('admin.galleries.edit',compact('gallery','title'));

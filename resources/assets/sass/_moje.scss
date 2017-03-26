@@ -10,3 +10,6 @@
    font-weight: 500;
    text-decoration: overline;
  }
+ div.dropdown-menu {
+   background-color: lighten($body-bg,3%) !important;
+ }
