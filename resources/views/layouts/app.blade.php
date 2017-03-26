@@ -73,9 +73,9 @@
 
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item  href="{{ route('logout') }}"
+                                <a class="dropdown-item"  href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
+                                document.getElementById('logout-form').submit();" >
                                 Logout
                                 </a>
 
@@ -106,7 +106,11 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<meta name="_token" content="{!! csrf_token() !!}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="{{ asset('js/tether.js') }}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
 @yield('scripts')
 </body>
 </html>

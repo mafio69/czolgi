@@ -3,7 +3,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Dodaj dział</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Popraw dział</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
             <div id="form-errors" class="clearfix"></div>
 
             <div class="modal-body">
-                <form method="post" action="{{url('/admin/dzialy')}}">
+                <form method="post" id="formEdit" action="{{url('/admin/dzialy')}}">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -30,25 +30,15 @@
                         <small id="opisHelp" class="form-text text-muted">Wprowadź krótki opis.</small>
                     </div>
                     <div class="form-group">
-                        <label for="nazwa">Dział nadrzędny</label>
-                        <select required id="overridingEdit" name="overriding" class="form-control">
-                            <option value=""></option>
-                            @foreach($sections as $sect)
-                                <option  class="form-control"
-                                        id="nazwa"
-                                        value="{{$sect->id}}" aria-describedby="overridingHelp"
-                                        name="overriding" placeholder="Wybierz dział nadrzędny">
-                                    {{$sect->nazwa}}
-                                </option>
-                            @endforeach
-                        </select>
-                        <div id="opcje">
+                       
+                        <span id="opcje">
 
-                        </div>
+                        </span>
                         <small id="overridingHelp" class="form-text text-muted">Wybierz dział nadrzędny.</small>
                     </div>
+                    <input type="hidden" name="section_id" id="section_id" value="">
                     <div class="form-group">
-                        <input type="submit" id="btn-save" class="btn btn-primary" value="Popraw">
+                        <input type="submit" id="btn-save-edit" class="btn btn-primary" value="Popraw">
                     </div>
                 </form>
             </div>

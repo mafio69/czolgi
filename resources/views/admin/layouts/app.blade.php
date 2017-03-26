@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color: #a5d6a7; margin-bottom: 1rem;">
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded" >
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -45,10 +45,10 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
-            <nav class="navbar navbar-light bg-faded" style="background-color: #a5d6a7;">
+            <nav class="navbar navbar-light bg-faded" >
                 <form class="form-inline my-2 my-lg-0">
                     <div class="input-group">
-                        <input style="border:none ;border-radius: 1.2rem 0 0 1.2rem;"   type="text" style="border-radius: 0;" class="form-control input-group-addon" placeholder="Search">
+                        <input style="border:none ;border-radius: 1.2rem 0 0 1.2rem;"   type="text" class="form-control input-group-addon" placeholder="Search">
                         <div class="input-group-btn">
                             <button class="btn btn-default"
                                     style="border:none ;border-radius:0  1.2rem 1.2rem 0;" type="submit">
@@ -58,14 +58,14 @@
                     </div>
                 </form>
             </nav>
-            <nav class="navbar navbar-light bg-faded" style="background-color: #a5d6a7;">
+            <nav class="navbar navbar-light bg-faded" >
                 <ul class="nav navbar-light navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li class="nav-item dropdown" style="background-color: #a5d6a7;">
+                        <li class="nav-item dropdown" >
                             <button class="btn btn-secondary btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
@@ -73,7 +73,7 @@
 
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item  href="{{ route('logout') }}"
+                                <a class="dropdown-item"  href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 Logout
@@ -105,14 +105,11 @@
 
 </div>
 <meta name="_token" content="{!! csrf_token() !!}" />
-<!-- Scripts
-<script src="{{ asset('js/app.js') }}"></script>-->
-<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="{{ asset('js/tether.js') }}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-
-
 @yield('scripts')
+
 </body>
 </html>

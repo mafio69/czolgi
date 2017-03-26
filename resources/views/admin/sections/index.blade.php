@@ -3,8 +3,8 @@
     {{$title}}
 @endsection
 @section('content')
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalDodaj">
-        Dodaj dział
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModalDodaj">
+        <i class="fa fa-plus" aria-hidden="true"></i> Dodaj dział
     </button>
 
 
@@ -35,11 +35,11 @@
                 </td>
                 <td>{{$section->opis}}</td>
                 <td>
-                    <button href="/admin/dzialy/{{$section->id}}/edit" value="{{$section->id}}" class="btn btn-outline-primary edit-dzial btn-sm">Edytuj</button>
+                    <button href="/admin/dzialy/{{$section->id}}/edit" value="{{$section->id}}" class="btn btn-outline-warning edit-dzial btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button>
 
                 </td>
                 <td>
-                    <button value="{{$section->id}}" href="/admin/dzialy/{{$section->id}}" class="btn btn-outline-danger btn-sm delete-dzial" id="usun">Usuń</button>
+                    <button value="{{$section->id}}" href="/admin/dzialy/{{$section->id}}" class="btn btn-outline-danger btn-sm delete-dzial" id="usun"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
                 </td>
             </tr>
         @endforeach
@@ -54,11 +54,12 @@
 @include('admin.layouts.modalEditSection')
 
 @section('scripts')
-    <meta name="_token" content="{!! csrf_token() !!}"/>
-    <script src="{{ asset('js/ajax_section.js') }}"></script>
+
+<script src="{{ asset('js/ajax_section.js') }}"></script>
+
     <script>
         var url = '/admin/dzialy';
-        $('.delete-dzial').click(function (e) {
+        $(document).on('click','.delete-dzial',function (e) {
             e.preventDefault();
             var sec_id = $(this).val();
             $.get(url + '/' + sec_id, function (data) {

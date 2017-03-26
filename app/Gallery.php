@@ -15,5 +15,9 @@ class gallery extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function typeTank()
+    {
+        return $this->belongsTo('App\TypeTank');
+    }
 
 }

@@ -3,7 +3,7 @@
 
 @section('content')
     <h2>Użytkownicy zarejstrowani w systemie <span class="badge">{{$users->count()}}</span></h2>
-    <div class="clearfix"><a class="btn btn-default pull-right" href="/users/create"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj uzytkownika</a></div>
+    <div class="clearfix"><a class="btn btn-outline-primary " href="/admin/users/create"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj uzytkownika</a></div>
     <div class="table-responsive" style="overflow: visible !important;">
     <table class="table table-striped" >
         <thead>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\gallery;
 
-class NewsController extends Controller
+class GalleriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,10 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = gallery::paginate(35);
+        $title = 'Encyklopedia' ;
+
+        return view('admin.galleries.index',compact('galleries','title'));
     }
 
     /**
@@ -45,7 +49,10 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-        //
+        $gallery = gallery::find($id);
+        $title = 'Edycja'.$gallery->nazwaGaleria ;
+
+        return view('admin.galleries.show',compact('gallery','title'));
     }
 
     /**
@@ -56,7 +63,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $gallery = gallery::find($id);
+        $title = 'Edycja '.$gallery->nazwaGaleria ;
+
+        return view('admin.galleries.edit',compact('gallery','title'));
     }
 
     /**

@@ -133,9 +133,12 @@ function godzina($data)
 
 function many_word($data, $number_char)
 {
-    If (strlen($data) > $number_char + 10)
-        return substr(strip_tags($data), 0, strpos(strip_tags($data), ' ', $number_char)).'...';
+
+    $data_st =strip_tags($data);
+    $data_st = $data_st.' ';
+    If (strlen($data_st) > $number_char)
+        return substr($data_st, 0, strpos($data_st, ' ', $number_char)).'...';
     else {
-        return $data;
+        return $data_st;
     }
 }

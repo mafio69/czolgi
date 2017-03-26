@@ -25,6 +25,41 @@ Route::group([
     'middleware' => 'role',
     'role' => 'admin'
 ], function () {
+     Route::get('admin', function () {
+    return view('admin.start');
+});
+
+    Route::get('admin/encyklopedia', [
+        'uses' => 'GalleriesController@index',
+        'as' => 'galleries'
+    ]);
+
+    Route::get('admin/encyklopedia/{id}/edit', [
+        'uses' => 'GalleriesController@edit',
+        'as' => 'galleries.edit'
+    ]);
+
+    Route::get('admin/nowosci', [
+        'uses' => 'NoveltiesController@index',
+        'as' => 'novelties'
+    ]);
+
+    Route::get('admin/nowosci/{id}', [
+        'uses' => 'NoveltiesController@show',
+        'as' => 'novelties.show'
+    ]);
+    Route::post('admin/nowosci', [
+        'uses' => 'NoveltiesController@store',
+        'as' => 'novelties.store'
+    ]);
+    Route::put('/admin/nowosci/{id}', [
+        'uses' => 'NoveltiesController@update',
+        'as' => 'novelties.update'
+    ]);
+    Route::delete('/admin/nowosci/{id}', [
+        'uses' => 'NoveltiesController@destroy',
+        'as' => 'novelties.delete'
+    ]);
     Route::get('admin/artykuly', [
         'uses' => 'ArticlesController@index',
         'as' => 'articles'
@@ -70,7 +105,7 @@ Route::group([
         'uses' => 'SectionsController@edit',
         'as' => 'sections.edit'
     ]);
-    Route::put('admin/dzialy/{id}', [
+    Route::put('/admin/dzialy/{id}', [
         'uses' => 'SectionsController@update',
         'as' => 'sections.update'
     ]);
@@ -107,7 +142,7 @@ Route::group([
         'uses' => 'UsersController@destroy',
         'as' => 'admin.users.delete'
     ]);
-    Route::resource('Admin/Nowosci','NewsController');
+
 });
 
 Auth::routes();

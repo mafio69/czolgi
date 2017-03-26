@@ -3,7 +3,7 @@
     {{$title}}
 @endsection
 @section('content')
-    <a href="{{url('/admin/artykuly/create')}}" class="btn btn-outline-primary">Dodaj artykuł</a>
+    <a href="{{url('/admin/artykuly/create')}}" class="btn btn-outline-primary"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj artykuł</a>
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
@@ -25,13 +25,13 @@
                 <td>{{many_word($article->tekstArt,250)}}</td>
                 <td>{{$article->dataArt}}</td>
                 <td>
-                    <a href="{{url('/admin/artykuly/'.$article->id).'/edit'}}" class="btn btn-outline-warning">Edytuj</a>
+                    <a href="{{url('/admin/artykuly/'.$article->id).'/edit'}}" class="btn btn-outline-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</a>
                 </td>
                 <td>
                     <form method="post" action="{{url('/admin/artykuly/'.$article->id)}}">
                         {{method_field('delete')}}
                         {{csrf_field()}}
-                        <button type="submit" value="{{$article->id}}" class="btn btn-outline-danger delete-art">Usuń
+                        <button type="submit" value="{{$article->id}}" class="btn btn-outline-danger delete-art btn-sm"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń
                         </button>
                     </form>
                 </td>

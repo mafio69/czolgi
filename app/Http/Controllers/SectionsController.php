@@ -56,7 +56,7 @@ class SectionsController extends Controller
         $dzial=section::create($request->all()); // Tu jest pobrany obiekt
         $zmienna = Section::select('nazwa')->where('id',$dzial->overriding_id)->first();// Tu też jest pobrany obiekt
         $dzial->overrding_nazwa = $zmienna->nazwa; // Tu dodaję dynamiczną właściwość i pobieram tylko wartość(nazwa) nie obiekt
-        return  response() ->json($dzial);
+        return  response()->json($dzial);
     }
 
     /**
@@ -96,8 +96,10 @@ class SectionsController extends Controller
         $section = section::find($id);
 
         $section->update($request->all());
+        $zmienna = Section::select('nazwa')->where('id',$section->overriding_id)->first();// Tu też jest pobrany obiekt
+        $section->overrding_nazwa = $zmienna->nazwa; // Tu dodaję dynamiczną właściwość i pobieram tylko wartość(nazwa) nie 
 
-        return redirect('/dzialy');
+        return response()->json($section);
     }
 
     /**

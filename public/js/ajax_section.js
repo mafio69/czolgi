@@ -1,9 +1,10 @@
 /**
  * Created by mf196 on 11.03.2017.
  */
-var url ='/admin/dzialy'
 $(document).ready(function () {
-    $("#btn-save").click(function (e) {
+  var url ='/admin/dzialy'
+
+    $(document).on('click',"#btn-save",(function (e) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -18,9 +19,7 @@ $(document).ready(function () {
             overriding_id: $('#overriding').val(),
              }
 
-        //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = 'add';
-
+              
         var type = "POST"; //for creating new resource
         var id = $('#dzial_id').val();
         var my_url = url;
@@ -37,19 +36,16 @@ $(document).ready(function () {
                 console.log(data);
 
                 var task = '<tr id="row-' + data.id + '"><td>' + data.id + '</td><td>' + data.nazwa + '</td><td>' + data.overrding_nazwa + '</td><td>' + data.nazwa + '</td>';
-                task += '<td><button  href="/admin/dzialy/' + data.id + '/edit" class="btn btn-outline-primary btn-sm" value="' + data.id + '">Edytuj</button></td>';
-                task += '<td><button value="' + data.id + '" href="/admin/dzialy/' + data.id + '" class="btn btn-outline-danger btn-sm delete_dzial">Usuń</button></td></tr>';
+                task += '<td><button  href="/admin/dzialy/' + data.id + '/edit"  class="btn btn-outline-warning edit-dzial btn-sm" value="' + data.id + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edytuj</button></td>';
+                task += '<td><button value="' + data.id + '" href="/admin/dzialy/' + data.id + '" class="btn btn-outline-danger btn-sm delete-dzial"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button></td></tr>';
 
-                if (state == "add") { //if user added a new record
-                    $('#tableSection').append(task);
-                } else { //if user updated an existing record
+              
+                $('#tableSection').append(task);
+                
 
-                    $("#task" +id).replaceWith(task);
-                }
+                $('#formCreate').trigger("reset");
 
-                $('#addSection').trigger("reset");
-
-                $('#myModal').modal('hide')
+                $('#myModalDodaj').modal('hide')
             },
             error: function (xhr) {
                 if (xhr.status == 422) {
@@ -73,33 +69,34 @@ $(document).ready(function () {
                 }
             }
         });
-    });
+    }));
 
-   $('.edit-dzial').on('click',function (e) {
+   $(document).on('click','.edit-dzial',function (e) {
       e.preventDefault();
        var sec_id = $(this).val();
-       console.log(sec_id);
+        $('#opcje').html('');
+       //console.log(sec_id);
        $.get(url + '/' + sec_id, function (data) {
            //success data
-           console.log(data);
+           //console.log(data);
            $('#frmTasks').attr('action', '/artykuly/' + data.id);
            $('#task_id').val(data.id);
            $('#nazwaEdit').val(data.nazwa);
            $('#opisEdit').val(data.opis);
-           $('#deleteArt').val(sec_id);
-           var opcje = '<select id="overrding_id" class="form-control" name="overrding_id">';
-           var i=0;
-           console.log(data);
+           $('#section_id').val(sec_id);
+           var opcje = '<select id="overriding_id" class="form-control" name="overriding_id">';
+          
+           //console.log(data);
             data.over.forEach(function (element) {
-                console.log(element);
+                //console.log(element);
                 opcje += '<option ';
                  if(element.id == data.overriding_id)
                  {
                      opcje += ' selected ';
-                     console.log(element.id + ' = '+data.overriding_id);
+                     //console.log(element.id + ' = '+data.overriding_id);
                  }
                 opcje += 'value="'+element.id +'">'+element.nazwa+'</option>';
-                i++;
+                
             })
                    opcje += '</select>';
             $('#opcje').append(opcje);
@@ -108,7 +105,58 @@ $(document).ready(function () {
 
    })
 
+   $(document).on('click','#btn-save-edit',function(e){
+    e.preventDefault();
 
+    var section_id = $('#section_id').val();
+    var my_url = url +'/'+ section_id;
+    //console.log(my_url);
+     var formData = {
+            'nazwa': $('#nazwaEdit').val(),
+            'opis': $('#opisEdit').val(),
+            'overriding_id': $('#overriding_id').val(),
+            '_token': $('input[name=_token]').val(),
+             };
+            
+     $.ajax({
+            type: 'PUT',
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+             success: function (data) {
+               
+                var task = '<tr id="row-' + data.id + '"><td>' + data.id + '</td><td>' + data.nazwa + '</td><td>' + data.overrding_nazwa + '</td><td>' + data.opis + '</td>';
+                task += '<td><button  href="/admin/dzialy/' + data.id + '/edit" class="btn btn-outline-warning edit-dzial btn-sm" value="' + data.id + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  Edytuj</button></td>';
+                task += '<td><button value="' + data.id + '" href="/admin/dzialy/' + data.id + '" class="btn btn-outline-danger btn-sm delete-dzial" id="usun"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button></td></tr>';
+                
+                $("#row-" +section_id).replaceWith(task);
+                $('#formEdit').trigger("reset");
+                $('#opcje').replaceWith('');
+                $('#myModalEdit').modal('hide')
+            },
+                 error: function (xhr) {
+                if (xhr.status == 422) {
+                    //process validation errors here.
+                    var errors =jQuery.parseJSON(xhr.responseText);//this will get the errors response data.
+                    //show them somewhere in the markup
+                    //e.g
+                    console.log(errors);
+                    var errorsHtml = '<div class="alert alert-danger"><ul class="list-group">';
 
+                    $.each(errors, function (key, value) {
+                        errorsHtml += '<li class="list-group-item">' + value[0] + '</li>'; //showing only the first error.
+                    });
+                    errorsHtml += '</ul></di>';
+
+                    $('#form-errors').html(errorsHtml); //appending to a <div id="form-errors"></div> inside form
+                } else {
+                    var errors =jQuery.parseJSON(xhr.responseText);
+                    console.log('Error:', errors);
+                }
+            }
+
+     })        
+
+   });
 
 });
