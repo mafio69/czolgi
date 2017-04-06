@@ -23,7 +23,7 @@
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded" >
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded bg-main navbar-fixed-bottom" style="margin-bottom: .8rem;">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -35,9 +35,11 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                @if(is_redactor())
+                <li class="nav-item ">
+                    <a class="nav-link" href="/admin">Admin</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
@@ -45,7 +47,7 @@
                     <a class="nav-link disabled" href="#">Disabled</a>
                 </li>
             </ul>
-            <nav class="navbar navbar-light bg-faded" >
+            <nav class="navbar navbar-light bg-faded bg-main" >
                 <form class="form-inline my-2 my-lg-0">
                     <div class="input-group">
                         <input style="border:none ;border-radius: 1.2rem 0 0 1.2rem;"   type="text" class="form-control input-group-addon" placeholder="Search">
@@ -58,22 +60,22 @@
                     </div>
                 </form>
             </nav>
-            <nav class="navbar navbar-light bg-faded" >
-                <ul class="nav navbar-light navbar-right">
+            <nav class="navbar navbar-light bg-faded bg-main" >
+                <ul class="navbar-nav navbar-right bg-main ">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        <li><a class="nav-item" href="{{ route('login') }}">Login</a></li>
+                        <li><a class="nav-item" href="{{ route('register') }}">Register</a></li>
                     @else
                         <li class="nav-item dropdown" >
-                            <button class="btn btn-secondary btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </button>
+
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
 
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton">
 
-                                <a class="dropdown-item"  href="{{ route('logout') }}"
+                                <a class="nav-link"  href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
                                 Logout
@@ -91,7 +93,7 @@
             </nav>
         </div>
     </nav>
-    </nav>
+
 <div class="container-fluid">
     <div class="row  justify-content-center">
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">

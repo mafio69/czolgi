@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 use App\gallery;
 use App\typeTank;
-use phpDocumentor\Reflection\Types\Null_;
 
 class GalleriesController extends Controller
 {
@@ -136,6 +135,12 @@ class GalleriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+       if( empty($request->zdjecieGaleria)){
+           echo 'Pliku nie ma';
+       }else{
+           echo 'Plik jest';
+       }
+       ;
         $tank = gallery::find($id);
         $niceNames = [  //nazwy dla pól formularza
             'nazwaGaleria' => 'nazwa czołgu',
@@ -153,7 +158,7 @@ class GalleriesController extends Controller
             'aliasGaleria' => 'required|max:125|min:3',
             'krajGaleria' => 'required|max:125|min:3',
             'rokPowstaniaGaleria' => 'required|min:4',
-            'zdjecieGaleria' => 'file|mimes:jpeg,bmp,png,jpg,gif',
+            'zdjecieGaleria' => 'image',
             'type_tank_id' => 'required|numeric',
             'opisGaleria' => 'required|min:20',
             'daneGaleria' => 'required|min:20',
@@ -170,11 +175,11 @@ class GalleriesController extends Controller
             $wozy_path = 'storage/wozy/';
             $delete_path = public_path() . '/' . $wozy_path;
             $delete_path_male = public_path() . '/' . $wozy_path . 'male/';
-            if (file_exists($delete_path . $request->zdjecieGaleria)) {
-                unlink($delete_path . $request->zdjecieGaleria);
+            if (file_exists($delete_path . $tank->zdjecieGaleria)) {
+                unlink($delete_path . $request->tankGaleria);
             }
-            if (file_exists($delete_path_male . $request->zdjecieGaleria)) {
-                unlink($delete_path_male . $request->zdjecieGaleria);
+            if (file_exists($delete_path_male . $tank->zdjecieGaleria)) {
+                unlink($delete_path_male . $tank->zdjecieGaleria);
             }
             Image::make($request->file('zdjecieGaleria'))->widen(800)->save($wozy_path . $name);
             Image::make($request->file('zdjecieGaleria'))->widen(150)->save($wozy_path . '/male/' . $name);
@@ -206,11 +211,6 @@ class GalleriesController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-    public function dane($id)
-    {
         $tank = gallery::find($id);
         $wozy_path = 'storage/wozy/';
         $delete_path = public_path() . '/' . $wozy_path;
@@ -222,6 +222,13 @@ class GalleriesController extends Controller
             unlink($delete_path_male . $tank->zdjecieGaleria);
         }
         $tank->delete();
+        return response()->json($tank);
+    }
+
+    public function dane($id)
+    {
+        $tank = gallery::find($id);
+
         return response()->json($tank);
     }
 }

@@ -28,16 +28,37 @@ Route::group([
      Route::get('admin', function () {
     return view('admin.start');
 });
-
+///////////////////////ENCYKLOPEDIA
     Route::get('admin/encyklopedia', [
         'uses' => 'GalleriesController@index',
         'as' => 'galleries'
     ]);
-
+    Route::get('admin/encyklopedia/create', [
+        'uses' => 'GalleriesController@create',
+        'as' => 'galleries'
+    ]);
+    Route::post('admin/encyklopedia',[
+        'uses' => 'GalleriesController@store',
+        'as' => 'galleries.store'
+    ]);
+    Route::get('admin/encyklopedia/{id}/dane', [
+        'uses' => 'GalleriesController@dane',
+        'as' => 'galleries.create'
+    ]);
     Route::get('admin/encyklopedia/{id}/edit', [
         'uses' => 'GalleriesController@edit',
         'as' => 'galleries.edit'
     ]);
+    Route::put('/admin/encyklopedia/{id}', [
+        'uses' => 'GalleriesController@update',
+        'as' => 'galleries.update'
+    ]);
+    Route::delete('/admin/encyklopedia/{id}', [
+        'uses' => 'GalleriesController@destroy',
+        'as' => 'galleries.delete'
+    ]);
+    
+    ///////////////////////TYPY CZOŁGÓW
     Route::get('/admin/typyCzolgow',[
         'uses' => 'TypeTanksController@index',
         'as' => 'typeTanks'
@@ -54,12 +75,17 @@ Route::group([
         'uses' => 'TypeTanksController@destroy',
         'as' => 'typeTanks.delete'
     ]);
-
-    Route::get('admin/typyCzolgow/{id}', [
+     Route::get('admin/typyCzolgow/{id}', [
         'uses' => 'TypeTanksController@show',
         'as' => 'typeTanks.show'
     ]);
 
+    
+///////////////////////NOWOŚCI
+    Route::get('/admin/nowosci',[
+        'uses' => 'NoveltiesController@index',
+        'as' => 'novelties'
+    ]);
     Route::get('admin/nowosci/{id}', [
         'uses' => 'NoveltiesController@show',
         'as' => 'novelties.show'
@@ -76,6 +102,7 @@ Route::group([
         'uses' => 'NoveltiesController@destroy',
         'as' => 'novelties.delete'
     ]);
+///////////////////////Artykuły
     Route::get('admin/artykuly', [
         'uses' => 'ArticlesController@index',
         'as' => 'articles'
@@ -104,6 +131,7 @@ Route::group([
         'uses' => 'ArticlesController@update',
         'as' => 'articles.update'
     ]);
+    ///////////////////////Działy
     Route::get('admin/dzialy', [
         'uses' => 'SectionsController@index',
         'as' => 'sections'
@@ -129,6 +157,7 @@ Route::group([
         'uses' => 'SectionsController@destroy',
         'as' => 'sections.delete'
     ]);
+    ///////////////////////Użytkownicy
     Route::get('/admin/users', [
         'uses' => 'UsersController@index',
         'as' => 'admin.users'

@@ -142,3 +142,7 @@ function many_word($data, $number_char)
         return $data_st;
     }
 }
+function is_redactor()
+{
+    return ((Auth()->check() && Auth()->user()->role->type === 'admin') || (Auth()->check() && Auth()->user()->role->type === 'moderator'));
+}
