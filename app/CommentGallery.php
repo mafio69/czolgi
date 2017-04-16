@@ -9,7 +9,7 @@ class CommentGallery extends Model
     protected $fillable = ['overriding_id','galleries_id','dataKom','infoKom','tytulKom','tekstKom','autorKom','mailKom','webKom','aprobataKom'];
     public function Gallery()
     {
-       return $this->belongsTo('App\Gallery');
+       return $this->belongsTo('App\Gallery','galleries_id', 'id');
     }
 
     public function commentOverriding()

@@ -28,12 +28,12 @@
                 <td>{{many_word($novelty->tekstNews,120)}}</td>
                 <td>{{$novelty->dataNews}}</td>
                 <td>
-                    <button value="{{$novelty->id}}" class="btn btn-outline-warning btn-edit"><i
+                    <button value="{{$novelty->id}}" class="btn btn-outline-warning btn-edit btn-sm "><i
                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj
                     </button>
                 </td>
                 <td>
-                    <button value="{{$novelty->id}}" class="btn btn-outline-danger btn-delete">
+                    <button value="{{$novelty->id}}" class="btn btn-outline-danger btn-delete btn-sm">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>Usuń
                     </button>
                 </td>

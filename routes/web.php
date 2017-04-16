@@ -12,22 +12,15 @@
 */
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::group([
-    'middleware' => 'role',
-    'role' => ['admin', 'moderator', 'user']
-], function () {
 
-});
+
 Route::group([
     'middleware' => 'role',
     'role' => 'admin'
 ], function () {
-     Route::get('admin', function () {
-    return view('admin.start');
-});
+    Route::get('admin', function () {
+        return view('admin.start');
+    });
 ///////////////////////ENCYKLOPEDIA
     Route::get('admin/encyklopedia', [
         'uses' => 'GalleriesController@index',
@@ -37,7 +30,7 @@ Route::group([
         'uses' => 'GalleriesController@create',
         'as' => 'galleries'
     ]);
-    Route::post('admin/encyklopedia',[
+    Route::post('admin/encyklopedia', [
         'uses' => 'GalleriesController@store',
         'as' => 'galleries.store'
     ]);
@@ -57,13 +50,13 @@ Route::group([
         'uses' => 'GalleriesController@destroy',
         'as' => 'galleries.delete'
     ]);
-    
+
     ///////////////////////TYPY CZOŁGÓW
-    Route::get('/admin/typyCzolgow',[
+    Route::get('/admin/typyCzolgow', [
         'uses' => 'TypeTanksController@index',
         'as' => 'typeTanks'
     ]);
-    Route::post('/admin/typyCzolgow',[
+    Route::post('/admin/typyCzolgow', [
         'uses' => 'TypeTanksController@store',
         'as' => 'typeTanks.store'
     ]);
@@ -75,14 +68,14 @@ Route::group([
         'uses' => 'TypeTanksController@destroy',
         'as' => 'typeTanks.delete'
     ]);
-     Route::get('admin/typyCzolgow/{id}', [
+    Route::get('admin/typyCzolgow/{id}', [
         'uses' => 'TypeTanksController@show',
         'as' => 'typeTanks.show'
     ]);
 
-    
+
 ///////////////////////NOWOŚCI
-    Route::get('/admin/nowosci',[
+    Route::get('/admin/nowosci', [
         'uses' => 'NoveltiesController@index',
         'as' => 'novelties'
     ]);
@@ -187,9 +180,43 @@ Route::group([
         'uses' => 'UsersController@destroy',
         'as' => 'admin.users.delete'
     ]);
+    /////////////////////////////Komentarze
+    Route::get('/admin/komentarze', [
+        'uses' => 'CommentGalleriesController@index',
+        'as' => 'admin.commentGalleries'
+    ]);
+    Route::post('/admin/komentarze/{id}/zmien', [
+        'uses' => 'CommentGalleriesController@change',
+        'as' => 'admin.change'
+    ]);
+    Route::delete('/admin/komentarze/{id}', [
+        'uses' => 'CommentGalleriesController@destroy',
+        'as' => 'admin.commentGalleries.delete'
+    ]);
+    ///////////////////////////////KsiegaGości
+    Route::get('/admin/ksiega-gosci', [
+        'uses' => 'QuestbooksController@index',
+        'as' => 'admin.QuestbooksController'
+    ]);
+    Route::post('/admin/ksiega-gosci/{id}/zmien', [
+        'uses' => 'QuestbooksController@change',
+        'as' => 'admin.QuestbooksController.change'
+    ]);
+    Route::delete('/admin/ksiega-gosci/{id}', [
+        'uses' => 'QuestbooksController@destroy',
+        'as' => 'admin.QuestbooksController.delete'
+    ]);
+});
+Route::group([
+    'middleware' => 'role',
+    'role' => ['admin', 'moderator', 'user']
+], function () {
 
 });
 
-Auth::routes();
 
+Auth::routes();
 Route::get('/home', 'HomeController@index');
+Route::get('/', function () {
+    return view('welcome');
+});

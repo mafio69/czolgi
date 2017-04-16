@@ -18,6 +18,7 @@
     <form action="/admin/encyklopedia/{{$gallery->id}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         {{method_field('PUT')}}
+        <h4>{{$gallery->typGaleria}}</h4>
         <div class="form-group row">
             <label for="nazwaGaleria" class="col-2 col-form-label">Nazwa Czołgu</label>
             <div class="col-10">

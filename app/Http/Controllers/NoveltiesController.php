@@ -74,7 +74,7 @@ class NoveltiesController extends Controller
         $users= User::all();
         $novelty->users = $users;
 
-        return  response()->json($novelty);
+        return  response()->json($novelty, 200, [], JSON_UNESCAPED_UNICODE);
     }
 
     /**

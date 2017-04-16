@@ -17,10 +17,11 @@ class GalleriesController extends Controller
     public function index()
     {
         $galleries = gallery::paginate(35);
+        $types_gallery = TypeTank::all();
         $title = 'Encyklopedia';
 
 
-        return view('admin.galleries.index', compact('galleries', 'title'));
+        return view('admin.galleries.index', compact('galleries', 'title','types_gallery'));
     }
 
     /**
@@ -56,7 +57,7 @@ class GalleriesController extends Controller
 
         ];
         $rules = [  //zasady walidacji
-            'nazwaGaleria' => 'required|max:125|min:5',
+            'nazwaGaleria' => 'required|max:125|min:3',
             'aliasGaleria' => 'required|max:125|min:3',
             'krajGaleria' => 'required|max:125|min:3',
             'rokPowstaniaGaleria' => 'required|min:4',
@@ -135,12 +136,7 @@ class GalleriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-       if( empty($request->zdjecieGaleria)){
-           echo 'Pliku nie ma';
-       }else{
-           echo 'Plik jest';
-       }
-       ;
+
         $tank = gallery::find($id);
         $niceNames = [  //nazwy dla pól formularza
             'nazwaGaleria' => 'nazwa czołgu',
@@ -154,7 +150,7 @@ class GalleriesController extends Controller
 
         ];
         $rules = [  //zasady walidacji
-            'nazwaGaleria' => 'required|max:125|min:5',
+            'nazwaGaleria' => 'required|max:125|min:3',
             'aliasGaleria' => 'required|max:125|min:3',
             'krajGaleria' => 'required|max:125|min:3',
             'rokPowstaniaGaleria' => 'required|min:4',
@@ -172,12 +168,14 @@ class GalleriesController extends Controller
         $this->validate($request, $rules, $message, $niceNames);
         if (!empty($request->zdjecieGaleria)) {
             $name = $request->file('zdjecieGaleria')->getClientOriginalName();
-            $wozy_path = 'storage/wozy/';
-            $delete_path = public_path() . '/' . $wozy_path;
-            $delete_path_male = public_path() . '/' . $wozy_path . 'male/';
+            $wozy_path = 'storage' . DIRECTORY_SEPARATOR . 'wozy' . DIRECTORY_SEPARATOR;
+            // $wozy_path2='wozy'.DIRECTORY_SEPARATOR;
+            $delete_path = public_path() . DIRECTORY_SEPARATOR . $wozy_path;
+            $delete_path_male = public_path() . DIRECTORY_SEPARATOR . $wozy_path . 'male' . DIRECTORY_SEPARATOR;
+            echo $delete_path_male . $tank->zdjecieGaleria;
             if (file_exists($delete_path . $tank->zdjecieGaleria)) {
-                unlink($delete_path . $request->tankGaleria);
-            }
+               unlink($delete_path . $tank->zdjecieGaleria);
+                            }
             if (file_exists($delete_path_male . $tank->zdjecieGaleria)) {
                 unlink($delete_path_male . $tank->zdjecieGaleria);
             }
@@ -200,7 +198,7 @@ class GalleriesController extends Controller
         $tank->zatwierdzGaleria = Null;
         $tank->dataUtworzeniaGaleria = date('Y-m-d H:i:s');
         $tank->save();
-        return redirect('/admin/encyklopedia');
+         return redirect('/admin/encyklopedia');
     }
 
     /**
@@ -229,6 +227,6 @@ class GalleriesController extends Controller
     {
         $tank = gallery::find($id);
 
-        return response()->json($tank);
+        return response()->json($tank, 200, [], JSON_UNESCAPED_UNICODE);
     }
 }

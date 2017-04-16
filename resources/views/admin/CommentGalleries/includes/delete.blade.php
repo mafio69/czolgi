@@ -1,5 +1,5 @@
 <div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -7,11 +7,14 @@
                 <h4 class="modal-title" id="myModalLabel">Czy jesteś pewien?</h4>
             </div>
             <div class="modal-body">
-                <form id="frmNovelty" method="post" name="frmNovelty" class="form-horizontal" novalidate="">
+                <form id="frmComments" method="post" name="frmComments" class="form-horizontal" novalidate="">
                     {{method_field('delete')}}
                     {{csrf_field()}}
-                    <h4>Czy napewno chcesz usunąć typ czołgu :</h4>
-                    <h4 id="nameDelete"></h4>
+                    <h4>Czy napewno chcesz usunąć komentarz autora :</h4>
+                    <h4 id="autorKom"></h4>
+                    <div id="tekstKom">
+
+                    </div>
 
                     <div class="form-group">
 

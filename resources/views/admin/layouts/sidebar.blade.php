@@ -9,6 +9,9 @@
             <a class="nav-link " href="{{url('/admin/artykuly')}}">Artykuły</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link " href="{{url('/admin/ksiega-gosci')}}">Ksiega gości</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link " href="{{url('/admin/nowosci')}}">Nowości</a>
         </li>
 
@@ -18,6 +21,7 @@
             <div class="dropdown-menu">
                 <a class="nav-link " href="{{url('/admin/encyklopedia')}}">Encyklopedia</a>
                 <a class="nav-link " href="{{url('/admin/typyCzolgow')}}">Typy czołgów</a>
+                <a class="nav-link " href="{{url('/admin/komentarze')}}">Komentarze</a>
             </div>
         <li class="nav-item">
             <a class="nav-link " href="{{url('/admin/users')}}">Użytkownicy</a>

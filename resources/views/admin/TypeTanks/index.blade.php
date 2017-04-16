@@ -26,14 +26,15 @@
                 <td>
                     <button href="/admin/typyCzolgow/{{$typeTank->id}}/edit" value="{{$typeTank->id}}"
                             class="btn btn-outline-warning edit-typCzolgu btn-sm"><i class="fa fa-pencil-square-o"
-                                                                                 aria-hidden="true"></i> Edytuj
+                                                                                     aria-hidden="true"></i> Edytuj
                     </button>
 
                 </td>
                 <td>
                     <button value="{{$typeTank->id}}" href="/admin/typyCzolgow/{{$typeTank->id}}"
-                            class="btn btn-outline-danger btn-sm delete-typCzolgu" id="{{$typeTank->id}}"><i class="fa fa-trash-o"
-                                                                                            aria-hidden="true"></i> Usuń
+                            class="btn btn-outline-danger btn-sm delete-typCzolgu" id="{{$typeTank->id}}"><i
+                                class="fa fa-trash-o"
+                                aria-hidden="true"></i> Usuń
                     </button>
                 </td>
             </tr>
@@ -71,9 +72,9 @@
                 $('#formModal').trigger("reset");
                 $('#ModalLabel').html('Popraw Typ Czołgu');
 
-                var my_url = url +'/'+ typ_id;
+                var my_url = url + '/' + typ_id;
                 console.log(my_url);
-                $.get(my_url,function (data) {
+                $.get(my_url, function (data) {
                     console.log(data);
                     $('#nameAdd').val(data.name);
                     $('#idTyp').val(data.id);
@@ -90,12 +91,12 @@
                 var typ_btn = $('#btn-save').val();
                 var id_typ = $('#idTyp').val();
                 var typ;
-                if (typ_btn == 'Dodaj'){
+                if (typ_btn == 'Dodaj') {
                     typ = 'POST';
-                   var my_url = url;
-                }else if (typ_btn == 'Popraw'){
+                    var my_url = url;
+                } else if (typ_btn == 'Popraw') {
                     typ = 'PUT';
-                    var my_url = url +'/'+id_typ;
+                    var my_url = url + '/' + id_typ;
                 }
 
                 $.ajax({
@@ -109,9 +110,9 @@
                         typeTank += '<td> <button href="/admin/typyCzolgow/{{$typeTank->id}}/edit" value="{{$typeTank->id}}" class="btn btn-outline-warning edit-typCzolgu btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button>';
                         typeTank += '</td><td><button value="{{$typeTank->id}}" href="/admin/typyCzolgow/{{$typeTank->id}}" class="btn btn-outline-danger btn-sm delete-typCzolgu" id="usun"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button> </td> </tr>';
 
-                        if(typ == 'POST'){
-                        $("#tableAdd").prepend(typeTank);
-                        }else if(typ == 'PUT'){
+                        if (typ == 'POST') {
+                            $("#tableAdd").prepend(typeTank);
+                        } else if (typ == 'PUT') {
                             $("#row" + id_typ).replaceWith(typeTank);
                         }
                         $('#formModal').trigger("reset");
@@ -158,7 +159,7 @@
             $('#delete').click(function (e) {
                 var typCzolgu_id = $(this).val();
                 e.preventDefault();
-                var formData ={ '_token': $('input[name=_token]').val()};
+                var formData = {'_token': $('input[name=_token]').val()};
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')

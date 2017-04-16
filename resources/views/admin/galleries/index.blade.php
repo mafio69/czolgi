@@ -21,7 +21,13 @@
 
         @foreach($galleries as $gallery)
             <tr id="row{{$gallery->id}}">
-                <th>{{$gallery->typGaleria}}</th>
+                <td>{{$gallery->typGaleria}} <br>
+                    @foreach($types_gallery as $type_gallery)
+                        @if(!empty($gallery->type_tank_id) && $gallery->type_tank_id == $type_gallery->id)
+                            <b>{{$type_gallery->name}}</b>
+                        @endif
+                    @endforeach
+                </td>
                 <td>{{$gallery->nazwaGaleria}}</td>
                 <td>{{many_word($gallery->opisGaleria,200)}}</td>
                 <td><img src="{{asset('storage/wozy/male/'.$gallery->zdjecieGaleria)}}"></td>

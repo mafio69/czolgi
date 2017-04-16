@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="shortcut icon" href="favicon.ico" >
+    <link rel="icon" type="image/gif" href="animated_favicon1.gif" >
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -94,7 +95,11 @@
         </div>
     </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" >
+    <div id="meesage">
+
+    </div>
+    @include('layouts.flash')
     <div class="row  justify-content-center">
         <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
             @include('admin.layouts.sidebar')
