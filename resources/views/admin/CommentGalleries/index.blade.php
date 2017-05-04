@@ -96,14 +96,12 @@
                 });
 
             })
-
             $(document).on('click', '.btn-delete', function (e) {
                 e.preventDefault();
                 var id_comment = $(this).val();
 
                 var tekstKom = $('#tekstKomD' + id_comment).val();
                 var autorKom = $('#autorKomD' + id_comment).val();
-
 
                 $('#tekstKom').text(tekstKom);
                 $('#autorKom').text(autorKom);
@@ -117,7 +115,6 @@
                 var formData = {'_token': $('input[name=_token]').val()};
                 id_comment = $(this).val();
                 $.ajax({
-
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                     },
@@ -128,7 +125,6 @@
                     success: function (data) {
                         console.log(data);
                         $("#row-" + id_comment).remove();
-
                         $('#modalDelete').modal('hide');
                         var message2 = '<div class="alert alert-success"> <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
                         message2 += '   <span aria-hidden="true">&times;</span> </button> Skasowano wpis. </div>';
@@ -140,12 +136,10 @@
                         if (xhr.status == 405) {
                             console.log(xhr);
                             $("#row-" + id_comment).remove();
-
                             $('#modalDelete').modal('hide');
                             var message2 = '<div class="alert alert-success"> <button type="button" class="close" data-dismiss="alert" aria-label="Close">';
                             message2 += '   <span aria-hidden="true">&times;</span> </button> Skasowano wpis. </div>';
                             $('#meesage').html(message2);
-
                         }
                         console.log('Error:', 'coś poszło nie tak :' + url + '/' + id_comment + ' - ' + xhr);
                     }

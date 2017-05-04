@@ -66,7 +66,7 @@
 @include('admin.Questbooks.includes.delete')
 @section('scripts')
     <script>
-        var url = "/admin/ksiega-gosci"
+        var url = "/admin/ksiega-gosci";
         $(function () {
             $(document).on('click', '.btn-change', function (e) {
 
@@ -75,7 +75,7 @@
 
                 var formData = {
                     '_token': $('input[name=_token]').val(),
-                    'aprobataKsiega': $('.choice:checked').val(),
+                    'aprobataKsiega': $('.choice:checked').val()
                 };
                 console.log(formData);
                 $.post(url + '/' + id_questbook + '/zmien', formData)

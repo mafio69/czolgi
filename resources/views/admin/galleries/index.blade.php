@@ -33,13 +33,13 @@
                 <td><img src="{{asset('storage/wozy/male/'.$gallery->zdjecieGaleria)}}"></td>
                 <td>
                     <button href="/admin/encyklopedia/{{$gallery->id}}/edit" value="{{$gallery->id}}"
-                            class="btn btn-outline-warning btn-edit"><i
+                            class="btn btn-outline-warning btn-edit btn-sm"><i
                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj
                     </button>
                 </td>
                 <td>
 
-                    <button value="{{$gallery->id}}" class="btn btn-outline-danger btn-delete">
+                    <button value="{{$gallery->id}}" class="btn btn-outline-danger btn-delete btn-sm">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>Usuń
                     </button>
                 </td>
