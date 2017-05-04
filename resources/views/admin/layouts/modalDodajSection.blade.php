@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModalDodaj" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -12,7 +12,7 @@
             <div id="form-errors" class="clearfix"></div>
 
             <div class="modal-body">
-                <form method="post" action="{{url('dzialy')}}">
+                <form id="formCreate" method="post" action="{{url('/admin/dzialy')}}">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nazwa">Dział nadrzędny</label>
-                        <select id="overriding" name="overriding" class="form-control">
+                        <select id="overriding" name="overriding_id" class="form-control">
                             @foreach($sections as $sect)
                                 <option class="form-control"
                                         id="nazwa"

@@ -27,13 +27,13 @@ class UsersController extends Controller
     {
         $users = User::with('role')->get();
         $role = Role::get();
-        return view('users.index',compact('users','role'));
+        return view('admin.users.index',compact('users','role'));
     }
 
     public function create()
     {
         $roles = Role::all();
-        return view('users.create',compact('roles'));
+        return view('admin.users.create',compact('roles'));
     }
 
 
@@ -93,7 +93,7 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('users.edit', compact('user','roles'));
+        return view('admin.users.edit', compact('user','roles'));
     }
 
     /**

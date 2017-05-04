@@ -59,4 +59,19 @@ class User extends Authenticatable
         return false;
     }
 
+    public function articles()
+    {
+        return $this->hasMany('App\Article');
+    }
+
+    public function novelties()
+    {
+        return $this->hasMany('App\Novelty');
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany('App\Gallery');
+    }
+
 }

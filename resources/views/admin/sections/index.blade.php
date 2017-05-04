@@ -3,11 +3,11 @@
     {{$title}}
 @endsection
 @section('content')
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Dodaj dział
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModalDodaj">
+        <i class="fa fa-plus" aria-hidden="true"></i> Dodaj dział
     </button>
 
-    @include('admin.layouts.modalDodajSection')
+
 
     <table id="tableSection" class="table table-striped table-hover table-responsive">
         <thead>
@@ -16,6 +16,7 @@
             <th>Nazwa</th>
             <th>Nadrzędny dział</th>
             <th>Opis</th>
+            <th>Akcja</th>
             <th>Akcja</th>
         </tr>
         </thead>
@@ -34,8 +35,11 @@
                 </td>
                 <td>{{$section->opis}}</td>
                 <td>
-                    <a href="/dzialy/{{$section->id}}/edit" class="btn btn-outline-primary btn-sm">Edytuj</a>
-                    <button value="{{$section->id}}" href="/dzialy/{{$section->id}}" class="btn btn-outline-danger btn-sm delete_dzial">Usuń</button>
+                    <button href="/admin/dzialy/{{$section->id}}/edit" value="{{$section->id}}" class="btn btn-outline-warning edit-dzial btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button>
+
+                </td>
+                <td>
+                    <button value="{{$section->id}}" href="/admin/dzialy/{{$section->id}}" class="btn btn-outline-danger btn-sm delete-dzial" id="usun"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
                 </td>
             </tr>
         @endforeach
@@ -44,6 +48,57 @@
     </table>
 
 @endsection
+
+@include('admin.layouts.modalDelete')
+@include('admin.layouts.modalDodajSection')
+@include('admin.layouts.modalEditSection')
+
 @section('scripts')
 
- @endsection
+<script src="{{ asset('js/ajax_section.js') }}"></script>
+
+    <script>
+        var url = '/admin/dzialy';
+        $(document).on('click','.delete-dzial',function (e) {
+            e.preventDefault();
+            var sec_id = $(this).val();
+            $.get(url + '/' + sec_id, function (data) {
+                //success data
+                console.log(data);
+                $('#frmTasks').attr('action', '/artykuly/' + data.id);
+                $('#task_id').val(data.id);
+                $('#tytulArt').text(data.nazwa);
+                $('#deleteArt').val(sec_id);
+
+
+                $('#myModal').modal('show');
+            })
+        });
+        //delete task and remove it from list
+        $('#deleteArt').click(function (e) {
+            var sec_id = $(this).val();
+            e.preventDefault();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                type: "DELETE",
+                url: url + '/' + sec_id,
+
+                success: function (data) {
+                    console.log(data);
+                    $("#row-" + sec_id).remove();
+                    $('#myModal').modal('hide');
+                },
+
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
+        });
+
+    </script>
+
+
+@endsection
