@@ -63,18 +63,18 @@ function czas($data)
         } else $m = 0;
 
         if ($time_stamp < 60) {
-            return '<span class="text-danger bg-danger"> Krótko po terminie </span>';
+            return '<span > Mineło </span>';
         } elseif ($t < 1 && $d > 0) {
-            return '<span class="text-danger bg-danger">Po terminie: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m.</span> ';
+            return '<span >Mineło: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m.</span> ';
         } elseif ($t < 1 && $d < 1 && $g > 0) {
-            return '<span class="text-danger bg-danger">Po terminie: ' . $g . '  g, ' . $m . ' m.</span>';
+            return '<span >Mineło: ' . $g . '  g, ' . $m . ' m.</span>';
         } elseif ($t < 1 && $d < 1 && $g < 1 && $m > 0) {
-            return '<span class="text-danger bg-danger">Po terminie: ' . $m . '  m. </span>';
+            return '<span >Mineło: ' . $m . '  m. </span>';
         } elseif ($t > 1 && $t < 2) {
-            return '<span class="text-danger bg-danger">Po terminie: ' . $t . ' tyg, ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
+            return '<span >Mineło: ' . $t . ' tyg, ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
         } else {
             //return $time_stamp . '-' . $t . '-' . $d;
-            return '<span class="text-danger bg-danger">Po terminie więcej niż tydzeń.</span>';
+            return '<span >'.date('Y-m-d',strtotime($data)).'</span>';
         }
     } else {
         $marker = (strtotime($data)) - time();
@@ -103,18 +103,18 @@ function czas($data)
         } else $m = 0;
 
         if ($time_stamp < 60) {
-            return '<span class="text-warning bg-warning">Mało czasu pozostało</span>';
+            return 'Mało czasu pozostało</span>';
         } elseif ($t < 1 && $d > 0) {
-            return '<span class="text-success bg-success">Pozostało: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m. </span>';
+            return '<span >Pozostało: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m. </span>';
         } elseif ($t < 1 && $d < 1 && $g > 0) {
-            return '<span class="text-warning bg-warning">Pozostało: ' . $g . '  g, ' . $m . ' m.</span>';
+            return 'Pozostało: ' . $g . '  g, ' . $m . ' m.</span>';
         } elseif ($t < 1 && $d < 1 && $g < 1 && $m > 0) {
-            return '<span class="text-warning bg-warning">Pozostało: ' . $m . '  m. </span>';
+            return 'Pozostało: ' . $m . '  m. </span>';
         } elseif ($t > 1 && $t < 2) {
-            return '<span class="text-success bg-success ">Pozostało: ' . $t . ' tyg., ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
+            return 'Pozostało: ' . $t . ' tyg., ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
         } else {
             //return $time_stamp . '-' . $t . '-' . $d;
-            return '<span class="text-success bg-success">Pozostało jeszcze, więcej niż tydzień.</span>';
+            return '<span >'.date('Y-m-d').'</span>';
         }
     }
 }

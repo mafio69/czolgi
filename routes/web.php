@@ -87,6 +87,16 @@ Route::group([
         'uses' => 'NoveltiesController@store',
         'as' => 'novelties.store'
     ]);
+    Route::post('admin/nowosci/obrazek/{id}', [
+        'uses' => 'NoveltiesController@image',
+        'as' => 'novelties.image'
+    ]);
+
+    Route::patch('/admin/nowosci/storeimg/{id}', [
+        'uses' => 'NoveltiesController@storeimg',
+        'as' => 'novelties.imagestore'
+    ]);
+
     Route::put('/admin/nowosci/{id}', [
         'uses' => 'NoveltiesController@update',
         'as' => 'novelties.update'
@@ -94,6 +104,7 @@ Route::group([
     Route::delete('/admin/nowosci/{id}', [
         'uses' => 'NoveltiesController@destroy',
         'as' => 'novelties.delete'
+
     ]);
 ///////////////////////Artykuły
     Route::get('admin/artykuly', [
@@ -217,6 +228,19 @@ Route::group([
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
-Route::get('/', function () {
-    return view('site.layouts.app');
-});
+Route::get('/', [
+    'uses' => 'SiteController@index',
+    'as' => 'SiteController'
+]);
+Route::get('/tapety', [
+    'uses' => 'SiteController@wallpers',
+    'as' => 'SiteController.wallpers'
+]);
+Route::get('/artykuly', [
+    'uses' => 'SiteController@articles',
+    'as' => 'SiteController.articles'
+]);
+Route::get('/artykuly/{id}', [
+    'uses' => 'SiteController@article',
+    'as' => 'SiteController.article'
+]);

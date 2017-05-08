@@ -21,6 +21,7 @@
 body{
   background-color: #787878;
   color:honeydew;
+  font-size:1rem;
 }
 .naw {
   margin: 4.3rem auto 0 auto ;
@@ -113,4 +114,8 @@ h1.wielkie {
   margin-top: 2rem;
   background-color: #666666;
 
+}
+div.card , div.card-block , div.card-header  {
+  background: #666666 !important;
+  border: none;
 }
