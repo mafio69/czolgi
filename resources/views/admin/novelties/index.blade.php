@@ -17,6 +17,7 @@
             <th>Data News</th>
             <th>Edytuj</th>
             <th>Usuń</th>
+            <th>Obrazek</th>
         </tr>
         </thead>
         <tbody id="start_table">
@@ -28,14 +29,22 @@
                 <td>{{many_word($novelty->tekstNews,120)}}</td>
                 <td>{{$novelty->dataNews}}</td>
                 <td>
-                    <button value="{{$novelty->id}}" class="btn btn-outline-warning btn-edit btn-sm "><i
+                    <button value="{{$novelty->id}}" class="btn btn-warning btn-edit btn-sm "><i
                                 class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj
                     </button>
                 </td>
                 <td>
-                    <button value="{{$novelty->id}}" class="btn btn-outline-danger btn-delete btn-sm">
+                    <button value="{{$novelty->id}}" class="btn btn-danger btn-delete btn-sm">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>Usuń
                     </button>
+                </td>
+                <td>
+                    <form action="/admin/nowosci/obrazek/{{$novelty->id}}" method="post">
+                        {{csrf_field()}}
+                    <button type="submit" value="{{$novelty->id}}" class="btn btn-primary btn-sm">
+                        <i class="fa fa-plus" aria-hidden="true"></i>Obrazek
+                    </button>
+                    </form>
                 </td>
             </tr>
         @endforeach
