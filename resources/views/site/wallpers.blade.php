@@ -28,12 +28,13 @@
     @endforeach
 @endsection
 @section('content')
-    <div class="row justify-content-around anchor_img">
+    <div class="row justify-content-around" >
         @foreach($obrazki as $tapeta)
-            <div class="col">
-                <a href="{{asset('storage/wallpers/duze/'.$tapeta)}}" class="anchor_img" title="Duża tapeta"><img
-                            class="wallpers_img" src="{{asset('storage/wallpers/male/'.$tapeta)}}"
-                            alt="Czolgi.info"></a>
+            <div class="col" id="tapety">
+                <a href="{{asset('storage/wallpers/duze/'.$tapeta)}}" class="anchor_img"  title="Duża tapeta">
+				<img class="wallpers_img " src="{{asset('storage/wallpers/male/'.$tapeta)}}"
+                            alt="Czolgi.info">
+				</a>
                 <div class="text-center">
                     <a href="{{asset('storage/wallpers/duze/'.$tapeta)}}" class="text-center"
                        download="{{asset('storage/wallpers/duze/'.$tapeta)}}" title="pobierz">
@@ -58,29 +59,43 @@
                 </div>
                 <div class="card-block">
                     <p class="card-text">{{many_word($gallery->opisGaleria,120)}}</p>
-                    <a href="#" class="btn btn-primary">Czytaj więcej</a>
+                    <a href="/encyklopedia/{{$gallery->id}}" class="btn btn-primary">Czytaj więcej</a>
 
                 </div>
             </div>
         </section>
         <br>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- inde -->
+        <!-- GaleriaRes -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9001339211341884"
-             data-ad-slot="5544609031"
-             data-ad-format="link"></ins>
+             data-ad-slot="5694684637"
+             data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     @endforeach
 @endsection
 @section('scripts')
-    <script src="{{ asset('js/jquery.tosrus.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.tosrus.all.min.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('anchor_img').tosrus();
+            $('.anchor_img').tosrus({
+   
+ 
+   effect     : "fade",
+   buttons    : "inline",
+   pagination : {
+      add        : true,
+	  type        :"bullets"
+   },
+   wrapper    : {
+      classes    : "img-border"
+   }
+
+});
         });
     </script>
+	
 @endsection

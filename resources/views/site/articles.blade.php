@@ -69,11 +69,9 @@
                 </div>
                 <div class="card-block">
                     <p class="card-text">{{many_word($gallery->opisGaleria,120)}}</p>
-                    <a href="#" class="btn btn-primary">Czytaj więcej</a>
-
+                    <a href="/encyklopedia/{{$gallery->id}}" class="btn btn-primary">Czytaj więcej</a>
                 </div>
             </div>
-
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- inde -->
             <ins class="adsbygoogle"
@@ -87,12 +85,12 @@
         </section>
         <br>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- inde -->
+        <!-- GaleriaRes -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9001339211341884"
-             data-ad-slot="5544609031"
-             data-ad-format="link"></ins>
+             data-ad-slot="5694684637"
+             data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

@@ -59,7 +59,7 @@ class NoveltiesController extends Controller
         $this->validate($request, $rules, $message, $niceNames);
 
         $novelty = Novelty::create($request->all());
-        $novelty->dataNews = time();
+        $novelty->dataNews = date('Y:m:d H:m:s');
         $novelty->save();
 
         return response()->json($novelty);

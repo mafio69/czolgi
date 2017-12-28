@@ -16,7 +16,7 @@ class GalleriesController extends Controller
      */
     public function index()
     {
-        $galleries = gallery::paginate(35);
+        $galleries = gallery::orderBy('id', 'DESC')->paginate(35);
         $types_gallery = TypeTank::all();
         $title = 'Encyklopedia';
 
@@ -229,4 +229,6 @@ class GalleriesController extends Controller
 
         return response()->json($tank, 200, [], JSON_UNESCAPED_UNICODE);
     }
+
+
 }

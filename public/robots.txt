@@ -1,2 +1,14 @@
 User-agent: *
-Disallow:
+Disallow: /images/
+Disallow: /img_news/
+Disallow: /img_src/
+Disallow: /js/
+Disallow: /obrazki/
+Disallow: /scss/
+Disallow: /storage/
+Disallow: /wozy/
+Disallow: /js/
+Disallow: /css/
+Disallow: /emots/
+Disallow: /fonts/
+Disallow: /ilu/

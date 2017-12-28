@@ -9,24 +9,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {{$title == 'Home' ? 'active' :''}}">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                <a title="Strona startowa" class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+            <li class="nav-item {{$title == 'Encyklopedia' ? 'active' :''}}">
+                <a title="Encyklopedia czołgów" class="nav-link" href="/encyklopedia">Encyklopedia</a>
             </li>
             <li class="nav-item {{$title == 'Tapety' ? 'active' :''}}">
-                <a class="nav-link" href="/tapety">Tapety</a>
+                <a title="Tapety z czołgami" class="nav-link" href="/tapety">Tapety</a>
             </li>
             <li class="nav-item {{$title == 'Artykuły' ? 'active' :''}}">
-                <a class="nav-link" href="/artykuly">Artykuły</a>
+                <a title="Artykuły o czołgach" class="nav-link" href="/artykuly">Artykuły</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+            <li class="nav-item {{$title == 'Księga gości' ? 'active' :''}}">
+                <a title="Księga gości" class="nav-link" href="/ksiega">Księga</a>
             </li>
+			<li class="nav-item">
+                <a title="Galerie zdjęć" class="nav-link" href="http://www.galerie.czolgi.info">Galerie</a>
+            </li>
+
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Szukaj">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
+        <form class="form-inline my-2 my-lg-0" method="get" action="/encyklopedia-szukaj">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Szukaj">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i>
             </button>
         </form>
     </div>

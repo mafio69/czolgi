@@ -204,6 +204,7 @@ Route::group([
         'uses' => 'CommentGalleriesController@destroy',
         'as' => 'admin.commentGalleries.delete'
     ]);
+
     ///////////////////////////////KsiegaGości
     Route::get('/admin/ksiega-gosci', [
         'uses' => 'QuestbooksController@index',
@@ -217,6 +218,7 @@ Route::group([
         'uses' => 'QuestbooksController@destroy',
         'as' => 'admin.QuestbooksController.delete'
     ]);
+    Route::get('/home', 'HomeController@index');
 });
 Route::group([
     'middleware' => 'role',
@@ -227,7 +229,7 @@ Route::group([
 
 
 Auth::routes();
-Route::get('/home', 'HomeController@index');
+
 Route::get('/', [
     'uses' => 'SiteController@index',
     'as' => 'SiteController'
@@ -243,4 +245,33 @@ Route::get('/artykuly', [
 Route::get('/artykuly/{id}', [
     'uses' => 'SiteController@article',
     'as' => 'SiteController.article'
+]);
+
+Route::get('/encyklopedia', [
+    'uses' => 'SiteController@galleries',
+    'as' => 'SiteController.galleries'
+]);
+Route::get('/ksiega', [
+    'uses' => 'SiteController@book',
+    'as' => 'SiteController.book'
+]);
+Route::post('/ksiega/add', [
+    'uses' => 'SiteController@bookAdd',
+    'as' => 'SiteController.bookAdd'
+]);
+Route::get('/encyklopedia/{id}', [
+    'uses' => 'SiteController@galleriesOne',
+    'as' => 'SiteController.galleriesOne'
+]);
+Route::get('/encyklopedia-szukaj', [
+    'uses' => 'SiteController@search',
+    'as' => 'SiteController.search'
+]);
+Route::post('/komentarze/add', [
+    'uses' => 'CommentGalleriesController@store',
+    'as' => 'commentGalleries.store'
+]);
+Route::post('/kontakt', [
+    'uses' => 'KontaktController@send',
+    'as' => 'KontaktController.send'
 ]);

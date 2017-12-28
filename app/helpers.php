@@ -30,93 +30,84 @@ function dayWeek($data)
     return $day;
 }
 
-function czas($data)
+function czas($date)
 { // zmienne pomocne przy obliczeniach (dlugość w sekundach)
-    $tydzien = 7 * 24 * 60 * 60;
-    $dzien = 24 * 60 * 60;
-    $godzina = 60 * 60;
-    $minuta = 60;
+      // date_default_timezone_set('Europe/Warsaw');
+    $od = strtotime($date); // data do odliczenia
+    $do = strtotime('now'); // czas teraz
 
+    $diff = abs($do - $od); // diff w sekundach. Funkcja abs podaje wartosc bezwzgledna argumentu, w przypadku gdy 'do' jest wieksze niz 'od' tak jak w podanym przez Ciebie przypadku
 
-    If (time() > strtotime($data)) {
-        $marker = time() - (strtotime($data));
-        $time_stamp = $marker;
-
-
-        if ((floor($marker / $tydzien) >= 1)) {
-
-            $t = floor($marker / $tydzien);
-            $marker = $marker - ($t * $tydzien);
-        } else $t = 0;
-
-        if ((floor($marker / $dzien) >= 1)) {
-            $d = floor($marker / $dzien);
-            $marker = $marker - ($d * $dzien);
-        } else $d = 0;
-        if ((floor($marker / $godzina) >= 1)) {
-            $g = floor($marker / $godzina);
-            $marker = $marker - ($g * $godzina);
-        } else $g = 0;
-        if ((floor($marker / $minuta) >= 1)) {
-            $m = floor($marker / $minuta);
-
-        } else $m = 0;
-
-        if ($time_stamp < 60) {
-            return '<span > Mineło </span>';
-        } elseif ($t < 1 && $d > 0) {
-            return '<span >Mineło: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m.</span> ';
-        } elseif ($t < 1 && $d < 1 && $g > 0) {
-            return '<span >Mineło: ' . $g . '  g, ' . $m . ' m.</span>';
-        } elseif ($t < 1 && $d < 1 && $g < 1 && $m > 0) {
-            return '<span >Mineło: ' . $m . '  m. </span>';
-        } elseif ($t > 1 && $t < 2) {
-            return '<span >Mineło: ' . $t . ' tyg, ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
-        } else {
-            //return $time_stamp . '-' . $t . '-' . $d;
-            return '<span >'.date('Y-m-d',strtotime($data)).'</span>';
+// pozniej juz mozemy operowac na wartosci w sekundach. 1 minuta = 60 sekund, zatem...
+    if ($diff > 120) {
+        $result = '';
+        $diff_week = floor($diff / (60 * 60 * 24 * 7));
+        if ($diff_week > 0 && $diff_week == 1) {
+            $result = $diff_week . ' tydzień ';
+        } elseif ($diff_week > 1) {
+            $result = $diff_week . ' tyg. ';
         }
+        $mod_week = $diff % (60 * 60 * 24 * 7);
+        $diff_day = floor($mod_week / (60 * 60 * 24));
+        if ($diff_day == 1) {
+            $result .= $diff_day . ' dzień ';
+        } elseif ($diff_day != 0) {
+            $result .= $diff_day . ' dni ';
+        } elseif ($diff_week > 0 && $diff_day == 0) {
+            $result .= '0 dni ';
+        }
+        $mod_hour = $mod_week % (60 * 60 * 24);
+        $diff_godzin = floor($mod_hour / (60 * 60));
+        if ($diff_godzin > 0 || $diff_day > 0) {
+            $result .= $diff_godzin . ' godz. ';
+        }
+        $mod_min = $mod_hour % (60 * 60);
+        $diff_minutes = floor($mod_min / (60));
+        $result .= $diff_minutes . ' min. ';
     } else {
-        $marker = (strtotime($data)) - time();
-        $time_stamp = $marker;
-        //$marker = abs($marker);
-        // zmienne pomocne przy obliczeniach (dlugość w sekundach)
-
-
-        if ((floor($marker / $tydzien) >= 1)) {
-
-            $t = floor($marker / $tydzien);
-            $marker = $marker - ($t * $tydzien);
-        } else $t = 0;
-
-        if ((floor($marker / $dzien) >= 1)) {
-            $d = floor($marker / $dzien);
-            $marker = $marker - ($d * $dzien);
-        } else $d = 0;
-        if ((floor($marker / $godzina) >= 1)) {
-            $g = floor($marker / $godzina);
-            $marker = $marker - ($g * $godzina);
-        } else $g = 0;
-        if ((floor($marker / $minuta) >= 1)) {
-            $m = floor($marker / $minuta);
-
-        } else $m = 0;
-
-        if ($time_stamp < 60) {
-            return 'Mało czasu pozostało</span>';
-        } elseif ($t < 1 && $d > 0) {
-            return '<span >Pozostało: ' . $d . ' d, ' . $g . ' g, ' . $m . ' m. </span>';
-        } elseif ($t < 1 && $d < 1 && $g > 0) {
-            return 'Pozostało: ' . $g . '  g, ' . $m . ' m.</span>';
-        } elseif ($t < 1 && $d < 1 && $g < 1 && $m > 0) {
-            return 'Pozostało: ' . $m . '  m. </span>';
-        } elseif ($t > 1 && $t < 2) {
-            return 'Pozostało: ' . $t . ' tyg., ' . $d . ' d, ' . $g . ' g ' . $m . ' m .</span>';
-        } else {
-            //return $time_stamp . '-' . $t . '-' . $d;
-            return '<span >'.date('Y-m-d').'</span>';
-        }
+        $result = "chwila";
     }
+    return $result;
+}
+
+function diff_date($date, $time_zone = 'Europe/Warsaw')
+{
+    date_default_timezone_set('Europe/Warsaw');
+    $od = strtotime($date); // data do odliczenia
+    $do = strtotime('now'); // czas teraz
+
+    $diff = abs($do - $od); // diff w sekundach. Funkcja abs podaje wartosc bezwzgledna argumentu, w przypadku gdy 'do' jest wieksze niz 'od' tak jak w podanym przez Ciebie przypadku
+
+// pozniej juz mozemy operowac na wartosci w sekundach. 1 minuta = 60 sekund, zatem...
+    if ($diff > 120) {
+        $result = '';
+        $diff_week = floor($diff / (60 * 60 * 24 * 7));
+        if ($diff_week > 0 && $diff_week == 1) {
+            $result = $diff_week . ' tydzień ';
+        } elseif ($diff_week > 1) {
+            $result = $diff_week . ' tyg. ';
+        }
+        $mod_week = $diff % (60 * 60 * 24 * 7);
+        $diff_day = floor($mod_week / (60 * 60 * 24));
+        if ($diff_day == 1) {
+            $result .= $diff_day . ' dzień ';
+        } elseif ($diff_day != 0) {
+            $result .= $diff_day . ' dni ';
+        } elseif ($diff_week > 0 && $diff_day == 0) {
+            $result .= '0 dni ';
+        }
+        $mod_hour = $mod_week % (60 * 60 * 24);
+        $diff_godzin = floor($mod_hour / (60 * 60));
+        if ($diff_godzin > 0 || $diff_day > 0) {
+            $result .= $diff_godzin . ' godz. ';
+        }
+        $mod_min = $mod_hour % (60 * 60);
+        $diff_minutes = floor($mod_min / (60));
+        $result .= $diff_minutes . ' min. ';
+    } else {
+        $result = "chwila";
+    }
+    return $result;
 }
 
 function dzien($data)

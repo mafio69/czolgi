@@ -17,7 +17,7 @@
                 </div>
                 <div class="card-block">
                     <p class="card-text">{{many_word($gallery->opisGaleria,120)}}</p>
-                    <a href="#" class="btn btn-primary">Czytaj więcej</a>
+                    <a href="/encyklopedia/{{$gallery->id}}" class="btn btn-primary">Czytaj więcej</a>
 
                 </div>
             </div>
@@ -48,13 +48,15 @@
 @endsection
 
 @section('content')
+<article>
     <div class="card-inverse">
         <div class="card-block">
-            <h4 class="card-title">{{$article->tytulArt}}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">{{$article->podtytulArt}}</h6>
+            <h1 class="card-title">{{$article->tytulArt}}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{$article->podtytulArt}}</h2>
             <div class="card-text">{!! $article->tekstArt !!}</div>
         </div>
     </div>
+</article>	
 @endsection
 
 @section('rightContent')
@@ -85,12 +87,12 @@
             </div>
         </article>
         <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- inde -->
+        <!-- GaleriaRes -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9001339211341884"
-             data-ad-slot="5544609031"
-             data-ad-format="link"></ins>
+             data-ad-slot="5694684637"
+             data-ad-format="auto"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

@@ -17,7 +17,7 @@ class CommentGalleriesController extends Controller
         $comments = CommentGallery::with('Gallery')->orderBY('dataKom','desc')->paginate(40);
         $title = "Komentarze do encyklopedii";
 
-        return view('admin.commentgalleries.index', compact('comments', 'title'));
+        return view('admin.CommentGalleries.index', compact('comments', 'title'));
     }
 
     /**
@@ -38,7 +38,33 @@ class CommentGalleriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $niceNames = [  //nazwy dla pól formularza
+            'tytulKom' => 'Tytuł komentarza',
+            'autorKom' => 'Podpis ',
+            'tekstKom' => 'Tekst komentarza',
+        ];
+        $rules = [  //zasady walidacji
+            'tytulKom' => 'required|string|min:4',
+            'autorKom' => 'required|string|min:4',
+            'tekstKom' => 'required|string|min:3',
+        ];
+        $message = [ //wiadomości wyswietlane
+            'required' => 'Pole :attribute jest wymagane.',
+            'min' => 'Pole :attribute  musi mieć minimum :min znaki.',
+        ];
+        $this->validate($request, $rules, $message, $niceNames);
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $browser = $_SERVER['HTTP_USER_AGENT'];
+        $referrer = $_SERVER['HTTP_REFERER'];
+        if ($referrer == "") {
+            $referrer = "Ta strona była dostępna bezpośrednio";
+        }
+        $comment = CommentGallery::create($request->all());
+        $comment->infoKom = $ip. ' '.$browser. ' '.$referrer;
+        //$comment->dataKom = time();
+        $comment->save();
+
+        return response()->json($comment);
     }
 
     /**

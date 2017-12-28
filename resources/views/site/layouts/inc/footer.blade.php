@@ -1,5 +1,5 @@
 <div class="stopka">
-    © {{date('Y')}} <a class="btn-link" href="http://designmf.pl">DESIGNMF</a> | <button class="btn-link" data-toggle="modal" href="" data-target="#kontaktModal">Kontakt</button>
+    © {{date('Y')}} <a class="btn-link" href="http://designmf.eu">DESIGNMF</a> | <button class="btn-link" data-toggle="modal" href="" data-target="#kontaktModal">Kontakt</button>
 </div>
 
 
