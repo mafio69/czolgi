@@ -3779,7 +3779,6 @@ tbody.collapse.show {
 .btn-group,
 .btn-group-vertical {
   position: relative;
-  display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
   vertical-align: middle;
@@ -3896,7 +3895,7 @@ tbody.collapse.show {
 }
 
 .btn-group-vertical {
-  display: -webkit-inline-box;
+
   display: -ms-inline-flexbox;
   display: inline-flex;
   -webkit-box-orient: vertical;
@@ -4122,7 +4121,7 @@ tbody.collapse.show {
 
 .custom-control {
   position: relative;
-  display: -webkit-inline-box;
+
   display: -ms-inline-flexbox;
   display: inline-flex;
   min-height: 1.6rem;
@@ -6736,7 +6735,7 @@ a.bg-inverse:hover {
 }
 
 .d-inline-flex {
-  display: -webkit-inline-box !important;
+
   display: -ms-inline-flexbox !important;
   display: inline-flex !important;
 }
@@ -6773,7 +6772,7 @@ a.bg-inverse:hover {
   }
 
   .d-sm-inline-flex {
-    display: -webkit-inline-box !important;
+
     display: -ms-inline-flexbox !important;
     display: inline-flex !important;
   }
@@ -6811,7 +6810,7 @@ a.bg-inverse:hover {
   }
 
   .d-md-inline-flex {
-    display: -webkit-inline-box !important;
+
     display: -ms-inline-flexbox !important;
     display: inline-flex !important;
   }
@@ -6849,7 +6848,7 @@ a.bg-inverse:hover {
   }
 
   .d-lg-inline-flex {
-    display: -webkit-inline-box !important;
+
     display: -ms-inline-flexbox !important;
     display: inline-flex !important;
   }
@@ -10311,7 +10310,7 @@ h1.wielkie {
 }
 
 .naglowek {
-  background-image: url("http://czolgi.dev/ilu/nowe/naglowek.jpg");
+  background-image: url("https://czolgi.dev/ilu/nowe/naglowek.jpg");
   background-position: center top;
   background-attachment: fixed;
   background-size: cover;

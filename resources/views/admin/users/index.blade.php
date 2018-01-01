@@ -16,10 +16,15 @@
         </thead>
         <tbody>
         @foreach($users as $user)
-        <tr class="{{$user->not_active ? 'text-muted bg-warning ' :''}}">
+
+      <tr class="{{$user->not_active ? 'text-muted bg-warning ' :''}}">
             <td>{{$user->not_active ? 'Nie aktywny -- ' :''}}{{$user->name}}</td>
             <td>{{$user->email}}</td>
-            <td>{{$user->role->type}}</td>
+            <td>
+                @if(is_object($user->role))
+                    {{$user->role->type}}
+                @endif
+            </td>
             <td>
 
                 <div class="dropdown ">
@@ -28,7 +33,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                       {{--}} <li><a href="{{url('/users/'.$user->id)}}" title="Pokaż"><i class="fa fa-eye" aria-hidden="true"></i> Pokaż</a></li>{{--}}
+                       <li><a href="{{url('/users/'.$user->id)}}" title="Pokaż"><i class="fa fa-eye" aria-hidden="true"></i> Pokaż</a></li>
                         <li><a class="btn btn-link" href="/admin/users/{{$user->id}}/edit"><i class="fa fa-pencil"  aria-hidden="true"></i><b> Edytuj</b></a></li>
                         <li>
 
